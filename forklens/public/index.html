@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ForkLens</title>
+    <link rel="stylesheet" href="/public/styles.css?v=3" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ForkLens</p>
+        <h1 id="title">Forkable evidence canvas</h1>
+      </div>
+      <div class="actions">
+        <button id="replay">Replay</button>
+        <button id="fit">Fit</button>
+        <button id="export">Export JSON</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel prompt-panel">
+          <h2>Scenario</h2>
+          <label class="field-label" for="scenarioSelect">Choose a demo</label>
+          <select id="scenarioSelect">
+            <option value="/data/demo-relocation.json">Maya relocation</option>
+            <option value="/data/demo-datacenter.json">AI data-center siting</option>
+            <option value="custom">Custom objective</option>
+          </select>
+          <label class="field-label" for="objectiveInput">Objective prompt</label>
+          <textarea id="objectiveInput" rows="9" placeholder="Type a high-stakes decision objective…"></textarea>
+          <div class="prompt-actions">
+            <button id="applyObjective">Apply prompt</button>
+            <button id="resetScenario">Reset</button>
+          </div>
+          <p id="loadStatus" class="helper-text">Loading scenario…</p>
+          <p class="helper-text">Typing changes the visible decision surface. Live API regeneration is the next step.</p>
+        </section>
+        <section class="panel objective-panel">
+          <h2>Objective</h2>
+          <p id="objective">Loading…</p>
+        </section>
+        <section class="panel">
+          <h2>Metrics</h2>
+          <dl id="metrics"></dl>
+        </section>
+        <section class="panel">
+          <h2>Lanes</h2>
+          <div id="laneFilters" class="chips"></div>
+        </section>
+      </aside>
+
+      <section class="canvas-shell">
+        <div id="canvasMeta" class="canvas-meta"></div>
+        <svg id="canvas" viewBox="0 0 2100 850" role="img" aria-label="ForkLens evidence canvas">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L7,3 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+          <g id="edges"></g>
+          <g id="lanes"></g>
+          <g id="nodes"></g>
+        </svg>
+      </section>
+
+      <aside class="details" id="details">
+        <section class="panel sticky">
+          <p class="eyebrow">Selected node</p>
+          <h2 id="detailTitle">Select a node</h2>
+          <p id="detailSummary">Click any card on the canvas to inspect citations, costs, confidence, and routing decisions.</p>
+          <div id="detailTags" class="chips"></div>
+          <div id="detailCost"></div>
+          <div id="detailSources"></div>
+          <pre id="detailJson"></pre>
+        </section>
+      </aside>
+    </main>
+
+    <script src="/public/app.js?v=3"></script>
+  </body>
+</html>

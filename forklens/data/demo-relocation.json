@@ -1,0 +1,612 @@
+{
+  "id": "demo-maya-bay-area-relocation",
+  "title": "ForkLens Demo: Maya's Bay Area Relocation",
+  "objective": "Maya is a 31-year-old product manager relocating to the Bay Area for a hybrid AI startup role. She needs to be in SoMa 2 to 3 days per week. Her max rent is $4,200/month. She has a dog, wants walkability, wants access to nature, and does not want a commute that ruins her week. She is comparing Hayes Valley, Mission Dolores, Noe Valley, Rockridge, Berkeley, and San Mateo. Where should Maya live if she wants the best balance of commute, rent, safety, walkability, dog-friendly lifestyle, access to nature, and downside risk?",
+  "created_at": "2026-07-02T05:46:59.164349+00:00",
+  "version": "0.1",
+  "lanes": [
+    "Objective",
+    "Discovery",
+    "Hayes Valley",
+    "Mission Dolores",
+    "Noe Valley",
+    "Rockridge",
+    "Berkeley",
+    "San Mateo",
+    "Dissent Lane",
+    "Human Forks",
+    "Recommendation"
+  ],
+  "nodes": [
+    {
+      "id": "objective",
+      "type": "objective",
+      "title": "Maya's decision objective",
+      "lane": "Objective",
+      "x": 80,
+      "y": 90,
+      "summary": "Maya is a 31-year-old product manager relocating to the Bay Area for a hybrid AI startup role. She needs to be in SoMa 2 to 3 days per week. Her max rent is $4,200/month. She has a dog, wants walkability, wants access to nature, and does not want a commute that ruins her week. She is comparing Hayes Valley, Mission Dolores, Noe Valley, Rockridge, Berkeley, and San Mateo. Where should Maya live if she wants the best balance of commute, rent, safety, walkability, dog-friendly lifestyle, access to nature, and downside risk?",
+      "status": "complete",
+      "confidence": 0.94,
+      "tags": [
+        "relocation",
+        "subjective-search",
+        "high-intent"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "human_seed",
+        "model": null,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "total_cost_usd": 0,
+        "latency_ms": null,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "breadth-search",
+      "type": "search_batch",
+      "title": "Neighborhood discovery pass",
+      "lane": "Discovery",
+      "x": 360,
+      "y": 90,
+      "summary": "Search commute patterns, rent ranges, walkability, parks, dog amenities, safety signals, local sentiment, and downside risks for each neighborhood.",
+      "status": "complete",
+      "confidence": 0.88,
+      "tags": [
+        "search-api",
+        "neighborhoods",
+        "low-cost"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "search_api",
+        "model": "search",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 36,
+        "total_cost_usd": 0.18,
+        "latency_ms": 9800,
+        "notes": null
+      },
+      "details": {
+        "why_this_route": "Use cheap breadth before paying for deeper synthesis. Most relocation questions need current web evidence, not long-context brute force."
+      }
+    },
+    {
+      "id": "source-clusters",
+      "type": "source_cluster",
+      "title": "Source clusters",
+      "lane": "Discovery",
+      "x": 360,
+      "y": 250,
+      "summary": "Group apartment listings, transit maps, neighborhood guides, local forums, crime dashboards, park maps, and commute calculators into reusable evidence clusters.",
+      "status": "complete",
+      "confidence": 0.82,
+      "tags": [
+        "source-cache",
+        "citations",
+        "local-data"
+      ],
+      "sources": [
+        {
+          "title": "BART station information",
+          "url": "https://www.bart.gov/stations",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Transit source to refresh in live runs.",
+          "source": "seed"
+        },
+        {
+          "title": "SFMTA trip planning",
+          "url": "https://www.sfmta.com/getting-around/trip-planning",
+          "date": null,
+          "last_updated": null,
+          "snippet": "San Francisco transit source to refresh in live runs.",
+          "source": "seed"
+        },
+        {
+          "title": "Walk Score",
+          "url": "https://www.walkscore.com/",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Walkability source to refresh in live runs.",
+          "source": "seed"
+        },
+        {
+          "title": "Niche neighborhood data",
+          "url": "https://www.niche.com/places-to-live/",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Neighborhood quality source to refresh in live runs.",
+          "source": "seed"
+        }
+      ],
+      "cost": {
+        "route": "source_cluster",
+        "model": "search+dedupe",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 12,
+        "total_cost_usd": 0.035,
+        "latency_ms": 6200,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "hayes-claim",
+      "type": "claim",
+      "title": "Hayes Valley: commute and energy",
+      "lane": "Hayes Valley",
+      "x": 690,
+      "y": 40,
+      "summary": "Strongest if Maya optimizes SoMa commute, urban energy, restaurants, and walkability. The tradeoff is price, smaller spaces, and a higher chance that daily dog logistics feel constrained.",
+      "status": "complete",
+      "confidence": 0.69,
+      "tags": [
+        "commute",
+        "walkability",
+        "price-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3100,
+        "output_tokens": 680,
+        "tool_calls": 0,
+        "total_cost_usd": 0.014,
+        "latency_ms": 6500,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "mission-claim",
+      "type": "claim",
+      "title": "Mission Dolores: social life and parks",
+      "lane": "Mission Dolores",
+      "x": 690,
+      "y": 155,
+      "summary": "Likely strongest for social energy, food, Dolores Park access, and car-light living. The hidden risk is noise, weekend crowding, and uneven block-by-block comfort.",
+      "status": "complete",
+      "confidence": 0.66,
+      "tags": [
+        "parks",
+        "social",
+        "block-level-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3000,
+        "output_tokens": 660,
+        "tool_calls": 0,
+        "total_cost_usd": 0.013,
+        "latency_ms": 6100,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "noe-claim",
+      "type": "claim",
+      "title": "Noe Valley: dog-friendly routine",
+      "lane": "Noe Valley",
+      "x": 690,
+      "y": 270,
+      "summary": "A safer-feeling, dog-friendly daily routine with access to parks and calmer streets. The commute may become the weekly tax if SoMa days cluster during peak hours.",
+      "status": "complete",
+      "confidence": 0.7,
+      "tags": [
+        "dog-friendly",
+        "calm",
+        "commute-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3050,
+        "output_tokens": 690,
+        "tool_calls": 0,
+        "total_cost_usd": 0.014,
+        "latency_ms": 6400,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "rockridge-claim",
+      "type": "claim",
+      "title": "Rockridge: space and BART tradeoff",
+      "lane": "Rockridge",
+      "x": 690,
+      "y": 385,
+      "summary": "A strong candidate if Maya values space, trees, restaurants, dog walks, and BART access. The tradeoff is cross-bay commute reliability and losing spontaneous SF social proximity.",
+      "status": "complete",
+      "confidence": 0.71,
+      "tags": [
+        "space",
+        "bart",
+        "cross-bay-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3150,
+        "output_tokens": 700,
+        "tool_calls": 0,
+        "total_cost_usd": 0.014,
+        "latency_ms": 6600,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "berkeley-claim",
+      "type": "claim",
+      "title": "Berkeley: nature and character",
+      "lane": "Berkeley",
+      "x": 690,
+      "y": 500,
+      "summary": "Good for nature access, character, food, and a less corporate daily rhythm. The commute and social distance from SF are the load-bearing downsides.",
+      "status": "complete",
+      "confidence": 0.62,
+      "tags": [
+        "nature",
+        "character",
+        "distance-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 2950,
+        "output_tokens": 640,
+        "tool_calls": 0,
+        "total_cost_usd": 0.013,
+        "latency_ms": 6000,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "sanmateo-claim",
+      "type": "claim",
+      "title": "San Mateo: practical but maybe too quiet",
+      "lane": "San Mateo",
+      "x": 690,
+      "y": 615,
+      "summary": "Practical if Maya wants a cleaner commute pattern by Caltrain or car, more predictability, and access down the Peninsula. The risk is that it may under-deliver on urban energy and walkable spontaneity.",
+      "status": "complete",
+      "confidence": 0.6,
+      "tags": [
+        "practical",
+        "peninsula",
+        "vibe-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3000,
+        "output_tokens": 650,
+        "tool_calls": 0,
+        "total_cost_usd": 0.013,
+        "latency_ms": 6100,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "dissent-commute",
+      "type": "counterclaim",
+      "title": "Blind spot: commute math lies",
+      "lane": "Dissent Lane",
+      "x": 1030,
+      "y": 210,
+      "summary": "Average commute estimates hide transfer pain, missed trains, dog-care timing, rainy days, and late meetings. ForkLens should require a simulated Tuesday and Thursday commute before ranking.",
+      "status": "complete",
+      "confidence": 0.76,
+      "tags": [
+        "blind-spot",
+        "commute",
+        "lived-experience"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "adversarial_search",
+        "model": "search+sonar",
+        "input_tokens": 2200,
+        "output_tokens": 560,
+        "tool_calls": 7,
+        "total_cost_usd": 0.042,
+        "latency_ms": 12900,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "dissent-vibes",
+      "type": "counterclaim",
+      "title": "Blind spot: vibes are evidence",
+      "lane": "Dissent Lane",
+      "x": 1030,
+      "y": 355,
+      "summary": "A ranked answer can miss whether Maya will actually like her Tuesday night. Local forums, street-level walks, park routines, and coffee/grocery paths belong in the evidence graph.",
+      "status": "complete",
+      "confidence": 0.73,
+      "tags": [
+        "blind-spot",
+        "vibes",
+        "subjective-search"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "adversarial_search",
+        "model": "search+sonar",
+        "input_tokens": 2050,
+        "output_tokens": 530,
+        "tool_calls": 6,
+        "total_cost_usd": 0.038,
+        "latency_ms": 11800,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "score-options",
+      "type": "computation",
+      "title": "Preference-weighted ranking",
+      "lane": "Human Forks",
+      "x": 1300,
+      "y": 180,
+      "summary": "Compute rankings for commute-first, dog-and-nature-first, social-energy-first, and least-regret strategies. Do not pretend one ranking is objectively correct.",
+      "status": "complete",
+      "confidence": 0.84,
+      "tags": [
+        "scoring",
+        "preferences",
+        "sandbox"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "local_sandbox_adapter",
+        "model": "python",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "total_cost_usd": 0.0,
+        "latency_ms": 85,
+        "notes": null
+      },
+      "details": {
+        "commute_first": {
+          "commute": 0.4,
+          "rent": 0.2,
+          "walkability": 0.15,
+          "safety": 0.15,
+          "vibes": 0.1
+        },
+        "dog_nature_first": {
+          "dog": 0.3,
+          "nature": 0.25,
+          "space": 0.2,
+          "commute": 0.15,
+          "rent": 0.1
+        },
+        "least_regret": {
+          "commute": 0.25,
+          "safety": 0.2,
+          "rent": 0.2,
+          "walkability": 0.15,
+          "dog": 0.1,
+          "vibes": 0.1
+        }
+      }
+    },
+    {
+      "id": "fork-priority",
+      "type": "fork",
+      "title": "Human fork: what can Maya not trade off?",
+      "lane": "Human Forks",
+      "x": 1300,
+      "y": 390,
+      "summary": "Pause before recommending. If commute must be easy, SF neighborhoods win. If dog-friendly routine matters most, Noe or Rockridge rise. If social energy matters, Hayes or Mission stay high.",
+      "status": "needs_human",
+      "confidence": 0.92,
+      "tags": [
+        "fork",
+        "human-decision",
+        "preference"
+      ],
+      "sources": [],
+      "cost": null,
+      "details": {
+        "options": [
+          "Protect commute and weekday energy",
+          "Protect dog-friendly routine and nature access",
+          "Protect social life and city feel",
+          "Minimize regret across all categories"
+        ]
+      }
+    },
+    {
+      "id": "recommendation",
+      "type": "decision",
+      "title": "Recommendation: shortlist by tradeoff",
+      "lane": "Recommendation",
+      "x": 1630,
+      "y": 250,
+      "summary": "Start with Hayes Valley and Mission Dolores if Maya wants commute and energy. Start with Noe Valley or Rockridge if she wants a durable dog-friendly routine. Treat San Mateo and Berkeley as branch tests, not defaults.",
+      "status": "complete",
+      "confidence": 0.82,
+      "tags": [
+        "final",
+        "decision-surface",
+        "relocation"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "agent_synthesis",
+        "model": "fast-search+sonar-pro",
+        "input_tokens": 5200,
+        "output_tokens": 1150,
+        "tool_calls": 0,
+        "total_cost_usd": 0.032,
+        "latency_ms": 8400,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "metrics",
+      "type": "metric",
+      "title": "Token economics ledger",
+      "lane": "Recommendation",
+      "x": 1630,
+      "y": 455,
+      "summary": "Relocation target: under $0.50, first useful neighborhood card under 10s, first fork under 60s, and every recommendation tied to sources or explicit preference weights.",
+      "status": "complete",
+      "confidence": 0.9,
+      "tags": [
+        "metrics",
+        "token-value-per-watt"
+      ],
+      "sources": [],
+      "cost": null,
+      "details": {
+        "target_cost_per_objective_usd": 0.5,
+        "target_time_to_first_canvas_node_ms": 10000,
+        "target_time_to_first_conflict_fork_ms": 60000,
+        "target_deep_research_escalation_rate": 0.1,
+        "target_broken_citation_rate": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "objective",
+      "target": "breadth-search",
+      "label": "decompose",
+      "kind": "routes"
+    },
+    {
+      "source": "objective",
+      "target": "source-clusters",
+      "label": "collect evidence",
+      "kind": "routes"
+    },
+    {
+      "source": "breadth-search",
+      "target": "hayes-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "mission-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "noe-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "rockridge-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "berkeley-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "sanmateo-claim",
+      "label": "neighborhood lane",
+      "kind": "supports"
+    },
+    {
+      "source": "hayes-claim",
+      "target": "dissent-commute",
+      "label": "commute reality",
+      "kind": "contradicts"
+    },
+    {
+      "source": "rockridge-claim",
+      "target": "dissent-commute",
+      "label": "cross-bay risk",
+      "kind": "contradicts"
+    },
+    {
+      "source": "mission-claim",
+      "target": "dissent-vibes",
+      "label": "block-level reality",
+      "kind": "contradicts"
+    },
+    {
+      "source": "noe-claim",
+      "target": "score-options",
+      "label": "score",
+      "kind": "routes"
+    },
+    {
+      "source": "rockridge-claim",
+      "target": "score-options",
+      "label": "score",
+      "kind": "routes"
+    },
+    {
+      "source": "dissent-commute",
+      "target": "fork-priority",
+      "label": "requires choice",
+      "kind": "forks"
+    },
+    {
+      "source": "dissent-vibes",
+      "target": "fork-priority",
+      "label": "requires choice",
+      "kind": "forks"
+    },
+    {
+      "source": "score-options",
+      "target": "fork-priority",
+      "label": "ranking depends on weights",
+      "kind": "forks"
+    },
+    {
+      "source": "fork-priority",
+      "target": "recommendation",
+      "label": "selected tradeoff",
+      "kind": "resolves"
+    },
+    {
+      "source": "recommendation",
+      "target": "metrics",
+      "label": "prove efficiency",
+      "kind": "supports"
+    }
+  ],
+  "metrics": {
+    "estimated_total_cost_usd": 0.408,
+    "estimated_latency_ms_sum": 86885,
+    "deep_research_escalation_rate": 0.0,
+    "frontier_token_displacement": "Search handles broad current data; synthesis only turns evidence into preference-aware cards.",
+    "primary_product_claim": "Chat returns a ranked neighborhood list; ForkLens returns the tradeoff surface behind the move."
+  },
+  "readme": "This seed graph uses Maya's relocation prompt as the relatable customer demo. Refresh with live Perplexity calls before publishing as a public artifact."
+}

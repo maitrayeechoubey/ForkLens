@@ -1,0 +1,12 @@
+[project]
+name = "forklens"
+version = "0.1.0"
+description = "Forkable evidence canvas for Perplexity-powered research"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+forklens = "forklens.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

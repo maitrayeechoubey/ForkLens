@@ -1,0 +1,592 @@
+{
+  "id": "demo-ai-inference-siting-2027",
+  "title": "ForkLens Demo: AI Inference Data-Center Siting",
+  "objective": "Choose the strongest 2027 North American AI inference data-center region while balancing grid capacity, water stress, clean power, incentives, latency, permitting, community risk, and climate exposure.",
+  "created_at": "2026-07-02T05:46:59.163134+00:00",
+  "version": "0.1",
+  "lanes": [
+    "Objective",
+    "Discovery",
+    "Northern Virginia",
+    "Columbus",
+    "Phoenix",
+    "Québec / Ontario",
+    "Atlanta",
+    "Dissent Lane",
+    "Human Forks",
+    "Recommendation"
+  ],
+  "nodes": [
+    {
+      "id": "objective",
+      "type": "objective",
+      "title": "Decision objective",
+      "lane": "Objective",
+      "x": 80,
+      "y": 90,
+      "summary": "Choose the strongest 2027 North American AI inference data-center region while balancing grid capacity, water stress, clean power, incentives, latency, permitting, community risk, and climate exposure.",
+      "status": "complete",
+      "confidence": 0.92,
+      "tags": [
+        "objective",
+        "high-stakes",
+        "infrastructure"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "human_seed",
+        "model": null,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "total_cost_usd": 0,
+        "latency_ms": null,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "breadth-search",
+      "type": "search_batch",
+      "title": "Cheap breadth pass",
+      "lane": "Discovery",
+      "x": 360,
+      "y": 90,
+      "summary": "Fan out public-data searches for utilities, interconnect queues, power prices, water risk, incentives, permitting, local news, and latency constraints.",
+      "status": "complete",
+      "confidence": 0.86,
+      "tags": [
+        "search-api",
+        "breadth",
+        "low-cost"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "search_api",
+        "model": "search",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 42,
+        "total_cost_usd": 0.21,
+        "latency_ms": 11500,
+        "notes": null
+      },
+      "details": {
+        "why_this_route": "Search API is cheaper than sending every source to a frontier model."
+      }
+    },
+    {
+      "id": "embed-filings",
+      "type": "source_cluster",
+      "title": "Document ingestion lane",
+      "lane": "Discovery",
+      "x": 360,
+      "y": 250,
+      "summary": "Chunk utility filings, incentive PDFs, council packets, sustainability reports, and public planning documents into reusable source clusters.",
+      "status": "complete",
+      "confidence": 0.8,
+      "tags": [
+        "embeddings",
+        "source-cache"
+      ],
+      "sources": [
+        {
+          "title": "EIA electricity data",
+          "url": "https://www.eia.gov/electricity/",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Power-market data source to refresh in live runs.",
+          "source": "seed"
+        },
+        {
+          "title": "EPA EJScreen",
+          "url": "https://www.epa.gov/ejscreen",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Environmental justice and local exposure source to refresh in live runs.",
+          "source": "seed"
+        },
+        {
+          "title": "NREL data and tools",
+          "url": "https://www.nrel.gov/research/data-tools.html",
+          "date": null,
+          "last_updated": null,
+          "snippet": "Clean energy and grid-analysis source to refresh in live runs.",
+          "source": "seed"
+        }
+      ],
+      "cost": {
+        "route": "contextual_embeddings",
+        "model": "pplx-embed-context-v1-0.6b",
+        "input_tokens": 118000,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "total_cost_usd": 0.06,
+        "latency_ms": 9800,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "nova-claim",
+      "type": "claim",
+      "title": "Northern Virginia: deployment gravity",
+      "lane": "Northern Virginia",
+      "x": 690,
+      "y": 60,
+      "summary": "Strongest near-term execution path because the ecosystem, fiber, vendors, and data-center labor market are already dense. The risk is that grid and permitting friction may cap marginal expansion.",
+      "status": "complete",
+      "confidence": 0.66,
+      "tags": [
+        "speed",
+        "ecosystem",
+        "grid-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 4200,
+        "output_tokens": 870,
+        "tool_calls": 0,
+        "total_cost_usd": 0.018,
+        "latency_ms": 7600,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "nova-counter",
+      "type": "counterclaim",
+      "title": "Northern Virginia dissent: saturation risk",
+      "lane": "Northern Virginia",
+      "x": 960,
+      "y": 60,
+      "summary": "The same ecosystem strength creates community, land, grid-upgrade, and political exposure. ForkLens should require evidence that the next 500MW can be permitted, powered, and defended publicly.",
+      "status": "complete",
+      "confidence": 0.58,
+      "tags": [
+        "dissent",
+        "permitting",
+        "community-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "deep_research_escalation",
+        "model": "sonar-deep-research",
+        "input_tokens": 7800,
+        "output_tokens": 1900,
+        "tool_calls": 0,
+        "total_cost_usd": 0.11,
+        "latency_ms": 46000,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "columbus-claim",
+      "type": "claim",
+      "title": "Columbus: balanced domestic option",
+      "lane": "Columbus",
+      "x": 690,
+      "y": 190,
+      "summary": "Looks like a credible compromise region: central latency, expandable industrial land, and growing tech manufacturing gravity. Needs utility-specific evidence on interconnection timing and power cost trajectory.",
+      "status": "complete",
+      "confidence": 0.62,
+      "tags": [
+        "balanced",
+        "latency",
+        "industrial-land"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3900,
+        "output_tokens": 760,
+        "tool_calls": 0,
+        "total_cost_usd": 0.016,
+        "latency_ms": 7100,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "phoenix-claim",
+      "type": "claim",
+      "title": "Phoenix: solar and speed, water tradeoff",
+      "lane": "Phoenix",
+      "x": 690,
+      "y": 320,
+      "summary": "Attractive if the decision optimizes near-term build speed, solar procurement, and Southwest latency. The water and heat-resilience tradeoff is too load-bearing to hide in a paragraph.",
+      "status": "complete",
+      "confidence": 0.6,
+      "tags": [
+        "solar",
+        "water-stress",
+        "heat"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 4100,
+        "output_tokens": 810,
+        "tool_calls": 0,
+        "total_cost_usd": 0.017,
+        "latency_ms": 7400,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "canada-claim",
+      "type": "claim",
+      "title": "Québec / Ontario: clean-power upside",
+      "lane": "Québec / Ontario",
+      "x": 690,
+      "y": 450,
+      "summary": "Potentially best for clean-power narrative and long-horizon energy cost, but cross-border latency, customer geography, sovereignty, and procurement friction require explicit scoring.",
+      "status": "complete",
+      "confidence": 0.57,
+      "tags": [
+        "clean-power",
+        "cross-border",
+        "latency"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 4000,
+        "output_tokens": 790,
+        "tool_calls": 0,
+        "total_cost_usd": 0.016,
+        "latency_ms": 7300,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "atlanta-claim",
+      "type": "claim",
+      "title": "Atlanta: Southeast latency and growth",
+      "lane": "Atlanta",
+      "x": 690,
+      "y": 580,
+      "summary": "A pragmatic Southeast option with strong network reach and business climate. Needs deeper work on utility readiness, climate exposure, and competition for large-load capacity.",
+      "status": "complete",
+      "confidence": 0.55,
+      "tags": [
+        "southeast",
+        "network",
+        "utility-readiness"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "sonar",
+        "model": "sonar-pro",
+        "input_tokens": 3700,
+        "output_tokens": 740,
+        "tool_calls": 0,
+        "total_cost_usd": 0.015,
+        "latency_ms": 6900,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "dissent-grid",
+      "type": "counterclaim",
+      "title": "Blind spot: grid queue optimism",
+      "lane": "Dissent Lane",
+      "x": 1030,
+      "y": 220,
+      "summary": "Most glossy siting analyses underweight interconnection delays. The canvas should force a branch where each region shows named utility upgrades, queue exposure, and credible energization dates.",
+      "status": "complete",
+      "confidence": 0.74,
+      "tags": [
+        "blind-spot",
+        "grid",
+        "timeline-risk"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "adversarial_search",
+        "model": "search+sonar",
+        "input_tokens": 2600,
+        "output_tokens": 620,
+        "tool_calls": 8,
+        "total_cost_usd": 0.051,
+        "latency_ms": 15600,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "dissent-community",
+      "type": "counterclaim",
+      "title": "Blind spot: local legitimacy",
+      "lane": "Dissent Lane",
+      "x": 1030,
+      "y": 360,
+      "summary": "The decision will fail if it treats community opposition as PR cleanup. Local water, noise, transmission, and tax-abatement narratives need to be first-class evidence nodes.",
+      "status": "complete",
+      "confidence": 0.7,
+      "tags": [
+        "blind-spot",
+        "community",
+        "trust"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "adversarial_search",
+        "model": "search+sonar",
+        "input_tokens": 2400,
+        "output_tokens": 580,
+        "tool_calls": 6,
+        "total_cost_usd": 0.044,
+        "latency_ms": 14200,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "calc-score",
+      "type": "computation",
+      "title": "Weighted decision score",
+      "lane": "Human Forks",
+      "x": 1300,
+      "y": 180,
+      "summary": "Compute three rankings: deployment speed, trust/sustainability, and five-year scalability. Do not collapse them until the human chooses the decision philosophy.",
+      "status": "complete",
+      "confidence": 0.79,
+      "tags": [
+        "sandbox",
+        "scoring",
+        "human-in-loop"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "local_sandbox_adapter",
+        "model": "python",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "total_cost_usd": 0.0,
+        "latency_ms": 95,
+        "notes": null
+      },
+      "details": {
+        "speed_weights": {
+          "grid": 0.35,
+          "permitting": 0.25,
+          "latency": 0.2,
+          "ecosystem": 0.2
+        },
+        "trust_weights": {
+          "water": 0.3,
+          "clean_power": 0.3,
+          "community": 0.25,
+          "climate": 0.15
+        },
+        "scale_weights": {
+          "grid": 0.3,
+          "land": 0.2,
+          "power_cost": 0.2,
+          "regulatory": 0.15,
+          "latency": 0.15
+        }
+      }
+    },
+    {
+      "id": "fork-philosophy",
+      "type": "fork",
+      "title": "Human fork: what are we optimizing?",
+      "lane": "Human Forks",
+      "x": 1300,
+      "y": 390,
+      "summary": "Pause execution until the user chooses the decision philosophy: fastest credible deployment, lowest trust risk, or best five-year scalability. Each branch produces a different winner.",
+      "status": "needs_human",
+      "confidence": 0.9,
+      "tags": [
+        "fork",
+        "human-decision",
+        "strategy"
+      ],
+      "sources": [],
+      "cost": null,
+      "details": {
+        "options": [
+          "Fastest credible deployment",
+          "Lowest trust and sustainability risk",
+          "Best five-year scalability"
+        ]
+      }
+    },
+    {
+      "id": "recommendation",
+      "type": "decision",
+      "title": "Recommendation: do not pick a winner yet",
+      "lane": "Recommendation",
+      "x": 1630,
+      "y": 260,
+      "summary": "The correct PM artifact is not a single answer. It is a decision surface that shows why Northern Virginia wins speed, Canada may win clean-power trust, and Columbus/Atlanta may deserve the next evidence pass.",
+      "status": "complete",
+      "confidence": 0.81,
+      "tags": [
+        "final",
+        "decision-surface",
+        "perplexity-fit"
+      ],
+      "sources": [],
+      "cost": {
+        "route": "agent_synthesis",
+        "model": "fast-search+sonar-pro",
+        "input_tokens": 6400,
+        "output_tokens": 1350,
+        "tool_calls": 0,
+        "total_cost_usd": 0.039,
+        "latency_ms": 9400,
+        "notes": null
+      },
+      "details": {}
+    },
+    {
+      "id": "metrics",
+      "type": "metric",
+      "title": "Token economics ledger",
+      "lane": "Recommendation",
+      "x": 1630,
+      "y": 470,
+      "summary": "Seed run target: under $0.75, first node under 15s, first conflict under 90s, under 15% deep-research escalation, and every final claim tied to source nodes.",
+      "status": "complete",
+      "confidence": 0.88,
+      "tags": [
+        "metrics",
+        "token-value-per-watt"
+      ],
+      "sources": [],
+      "cost": null,
+      "details": {
+        "target_cost_per_objective_usd": 0.75,
+        "target_time_to_first_canvas_node_ms": 15000,
+        "target_deep_research_escalation_rate": 0.15,
+        "target_context_compression_ratio": "5x-10x",
+        "target_broken_citation_rate": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "objective",
+      "target": "breadth-search",
+      "label": "decompose",
+      "kind": "routes"
+    },
+    {
+      "source": "objective",
+      "target": "embed-filings",
+      "label": "ingest docs",
+      "kind": "routes"
+    },
+    {
+      "source": "breadth-search",
+      "target": "nova-claim",
+      "label": "region lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "columbus-claim",
+      "label": "region lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "phoenix-claim",
+      "label": "region lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "canada-claim",
+      "label": "region lane",
+      "kind": "supports"
+    },
+    {
+      "source": "breadth-search",
+      "target": "atlanta-claim",
+      "label": "region lane",
+      "kind": "supports"
+    },
+    {
+      "source": "nova-claim",
+      "target": "nova-counter",
+      "label": "stress test",
+      "kind": "contradicts"
+    },
+    {
+      "source": "nova-claim",
+      "target": "dissent-grid",
+      "label": "grid risk",
+      "kind": "contradicts"
+    },
+    {
+      "source": "phoenix-claim",
+      "target": "dissent-community",
+      "label": "water legitimacy",
+      "kind": "contradicts"
+    },
+    {
+      "source": "columbus-claim",
+      "target": "calc-score",
+      "label": "score",
+      "kind": "routes"
+    },
+    {
+      "source": "nova-counter",
+      "target": "calc-score",
+      "label": "risk-adjust",
+      "kind": "routes"
+    },
+    {
+      "source": "dissent-grid",
+      "target": "fork-philosophy",
+      "label": "requires choice",
+      "kind": "forks"
+    },
+    {
+      "source": "dissent-community",
+      "target": "fork-philosophy",
+      "label": "requires choice",
+      "kind": "forks"
+    },
+    {
+      "source": "calc-score",
+      "target": "fork-philosophy",
+      "label": "ranking depends on weights",
+      "kind": "forks"
+    },
+    {
+      "source": "fork-philosophy",
+      "target": "recommendation",
+      "label": "selected strategy",
+      "kind": "resolves"
+    },
+    {
+      "source": "recommendation",
+      "target": "metrics",
+      "label": "prove efficiency",
+      "kind": "supports"
+    }
+  ],
+  "metrics": {
+    "estimated_total_cost_usd": 0.596,
+    "estimated_latency_ms_sum": 142895,
+    "deep_research_escalation_rate": 0.09090909090909091,
+    "frontier_token_displacement": "Search and embeddings handle breadth; deep reasoning is reserved for conflict nodes.",
+    "primary_product_claim": "Research mode returns a report; ForkLens returns the decision surface and the branches not taken."
+  },
+  "readme": "This seed graph is intentionally marked as a replayable demo. Run ForkLens with a Perplexity API key to refresh every source and claim before sharing publicly."
+}
